@@ -1,2 +1,2 @@
-# projeto-locadora-carros
-Projeto de uma locadora de carros utilizando Python e MySQL. 
+# sistema-geren-hosp
+Projeto de um Sistema de Gerenciamento Hospitalar feito em Python e MySQL. 
