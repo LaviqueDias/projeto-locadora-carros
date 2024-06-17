@@ -59,7 +59,7 @@ criarTabela(conexao, 'procedimentos', campos_procedimentos, "hospital")
 
 opcao = 1
 
-while opcao != 6:
+while opcao != 9:
     print('\n=====HOSPITA ABC=====')
     print("1. Adicionar novo paciente")
     print("2. Adicionar novo médico")
@@ -107,10 +107,10 @@ while opcao != 6:
 
         if len(paciente_pesquisado) != 0:
             print('\nPaciente do CPF %d encontrado!' % (cpf))
-            print('\CPF: %s\nNome: %s\nIdade: %s\nEndereço: %s\nTelefone: %s\n' % (paciente_pesquisado[0][0], paciente_pesquisado[0][1], paciente_pesquisado[0][2], paciente_pesquisado[0][3], paciente_pesquisado[0][4]))
+            print('\nCPF: %s\nNome: %s\nIdade: %s\nEndereço: %s\nTelefone: %s\n' % (paciente_pesquisado[0][0], paciente_pesquisado[0][1], paciente_pesquisado[0][2], paciente_pesquisado[0][3], paciente_pesquisado[0][4]))
         
         else:
-            print('\Paciente não encontrado!')
+            print('\nPaciente não encontrado!')
     
     elif opcao == 4: # Pesquisar médico pelo CRM
         crm = int(input('\nDigite o CRM do médico: '))
@@ -121,10 +121,10 @@ while opcao != 6:
 
         if len(medico_pesquisado) != 0:
             print('\nMédico do CRM %d encontrado!' % (crm))
-            print('\Nome: %s\nEspecialidade: %s\nCRM: %s\nTelefone: %s\n' % (medico_pesquisado[0][0], medico_pesquisado[0][1], medico_pesquisado[0][2], medico_pesquisado[0][3]))
+            print('\nNome: %s\nEspecialidade: %s\nCRM: %s\nTelefone: %s\n' % (medico_pesquisado[0][0], medico_pesquisado[0][1], medico_pesquisado[0][2], medico_pesquisado[0][3]))
         
         else:
-            print('\Médico não encontrado!')
+            print('\nMédico não encontrado!')
     
     elif opcao == 5: # Excluir paciente pelo CPF
         cpf = int(input('Digite o CPF do paciente a ser deletado: '))
