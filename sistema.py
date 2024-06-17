@@ -127,16 +127,22 @@ while opcao != 6:
             print('\Médico não encontrado!')
     
     elif opcao == 5: # Excluir paciente pelo CPF
-        codigo = int(input('Digite o código do filme a ser deletado: '))
+        cpf = int(input('Digite o CPF do paciente a ser deletado: '))
 
-        sql_delete = 'delete from filmes where codigo = %s'
-        dados_delete = (codigo,)
+        sql_delete = 'delete from pacientes where cpf = %s'
+        dados_delete = (cpf,)
         linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
         print("%s linhas foram excluídas." % (linhas_afetadas))
 
 
     elif opcao == 6: # Excluir médico pelo CRM
-        pass
+        crm = int(input('Digite o CRM do médico a ser deletado: '))
+
+        sql_delete = 'delete from medicos where crm = %s'
+        dados_delete = (crm,)
+        linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
+        print("%s linhas foram excluídas." % (linhas_afetadas))
+
 
     elif opcao == 7: # Agendar consulta
         pass
