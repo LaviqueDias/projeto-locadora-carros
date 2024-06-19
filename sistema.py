@@ -77,9 +77,17 @@ while opcao != 9:
         endereco = input('Digite o endereco do paciente: ')
         telefone = input('Digite o telefone do paciente: ')
         dados_paciente = (cpf, nome, idade, endereco, telefone)
+        
+        sql_select = 'select * from pacientes where cpf = %s' % (cpf)
+        paciente_pesquisado = listarBancoDados(conexao, sql_select)
 
-        sql_insert = 'insert into pacientes (cpf, nome, idade, endereco, telefone) values (%s, %s, %s, %s, %s)'
-        insertNoBancoDados(conexao, sql_insert, dados_paciente)
+        if len(paciente_pesquisado) == 0:
+            sql_insert = 'insert into pacientes (cpf, nome, idade, endereco, telefone) values (%s, %s, %s, %s, %s)'
+            insertNoBancoDados(conexao, sql_insert, dados_paciente)
+            print('\nPaciente cadastrado com sucesso!')
+    
+        else:
+            print('\nPaciente já cadastrado!')
 
 
     elif opcao == 2: # Adicionar novo médico
@@ -90,8 +98,16 @@ while opcao != 9:
         telefone = input('Digite o telefone do médico: ')
         dados_medico = (nome, especialidade, crm, telefone)
 
-        sql_insert = 'insert into medicos (nome, especialidade, crm, telefone) values (%s, %s, %s, %s)'
-        insertNoBancoDados(conexao, sql_insert, dados_medico)
+        sql_select = 'select * from medicos where crm = %s' % (crm)
+        medico_pesquisado = listarBancoDados(conexao, sql_select)
+
+        if len(medico_pesquisado) == 0:
+            sql_insert = 'insert into medicos (nome, especialidade, crm, telefone) values (%s, %s, %s, %s)'
+            insertNoBancoDados(conexao, sql_insert, dados_medico)
+            print('\nMédico cadastrado com sucesso!')
+    
+        else:
+            print('\nMédico já cadastrado!')
 
 
     elif opcao == 3: # Pesquisar paciente pelo CPF
