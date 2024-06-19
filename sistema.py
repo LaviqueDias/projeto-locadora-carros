@@ -208,13 +208,49 @@ while opcao != 9:
                 print('Digite uma opção válida!')
 
     elif opcao == 8: # Registrar procedimento médico
-        pass
+        opcao = 1
+
+        while opcao != 3:
+            print('\n=====REGISTRO DE PROCEDIMENTOS=====')
+            print("1. Adicionar um procedimento médico")
+            print("2. Visualizar todos os procedimentos médicos")
+            print('3. Sair')
+
+            opcao = int(input('\nDigite uma opção: '))
+
+            if opcao == 1: # Adicionar um procedimento médico
+                data = input('\nDigite a data da consulta: ')
+                receita = input('Digite a receita pro paciente: ')
+                cpf = int(input('Digite o CPF do paciente: '))
+                crm = int(input('Digite o CRM do médico: '))
+                dados_procedimento = (data, receita, cpf, crm)
+
+                sql_insert = 'insert into procedimentos (data, receita, cpf, crm) values (%s, %s, %s, %s)'
+                insertNoBancoDados(conexao, sql_insert, dados_procedimento)                
+
+            elif opcao == 2: # Visualizar todos os procedimentos médicos
+                sql_select = 'select * from procedimentos'
+
+                procedimentos = listarBancoDados(conexao, sql_select)
+
+                if len(procedimentos) != 0:
+                    print('\nLista de Procedimentos médicos:')
+                    
+                    for item in procedimentos:
+                        print('\nID: %s\nData: %s\nReceita: %s\nCPF paciente: %s\nCRM médico: %s\n' % (item[0], item[1], item[2], item[3], item[4]))
+                
+                else:
+                    print('\nNão há procedimentos cadastrados!')
+                
+            elif opcao != 3:
+                print('Digite uma opção válida!')
+
 
     elif opcao != 9:
         print('\nOpção Inválida')
 
 
 
-print('\nObrigado por usar a locadora!')
+print('\nObrigado por usar o sistema do nosso hospital!')
 encerrarBancoDados(conexao)
 
