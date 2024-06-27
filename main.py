@@ -1,3 +1,4 @@
+
 from sistema import *
 
 opcao = 1
@@ -75,16 +76,16 @@ while opcao != 9:
         
         else:
             print('\nMédico não encontrado!')
-            
+
     
     elif opcao == 5: # Excluir paciente pelo CPF
+
         cpf = int(input('Digite o CPF do paciente a ser deletado: '))
 
-        sql_delete = 'delete from pacientes where cpf = %s'
-        dados_delete = (cpf,)
-        linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
+        foi_excluido = excluir_paciente_cpf(cpf)
+        
 
-        if linhas_afetadas != 0:
+        if foi_excluido == True:
             print('Paciente do CPF %s removido com sucesso!' % (cpf))
         
         else:
@@ -92,18 +93,17 @@ while opcao != 9:
 
 
     elif opcao == 6: # Excluir médico pelo CRM
+
         crm = int(input('Digite o CRM do médico a ser deletado: '))
 
-        sql_delete = 'delete from medicos where crm = %s'
-        dados_delete = (crm,)
-        linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
-        print("%s linhas foram excluídas." % (linhas_afetadas))
+        foi_excluido = excluir_medico_crm(crm)
 
-        if linhas_afetadas != 0:
+        if foi_excluido == True:
             print('Médico do CRM %s removido com sucesso!' % (crm))
         
         else:
             print('Não há médico com o CRM informado!')
+
 
 
     elif opcao == 7: # Agendar consulta
@@ -125,13 +125,15 @@ while opcao != 9:
                 crm = int(input('Digite o CRM do médico: '))
                 dados_agendamento = (data, motivo, cpf, crm)
 
-                sql_insert = 'insert into agendamentos (data, motivo, cpf, crm) values (%s, %s, %s, %s)'
-                insertNoBancoDados(conexao, sql_insert, dados_agendamento)                
+                agendar_consulta(dados_agendamento)
+
+                print('Consulta agendada com sucesso!')
+
+                                
 
             elif opcao == 2: # Visualizar todas as consultas
-                sql_select = 'select * from agendamentos'
 
-                consultas = listarBancoDados(conexao, sql_select)
+                consultas = listar_consultas()
 
                 if len(consultas) != 0:
                     print('\nLista de Consultas agendadas:')
@@ -146,13 +148,9 @@ while opcao != 9:
             elif opcao == 3: # Cancelar o agendamento de uma consulta
                 id = int(input('Digite o ID da consulta que deseja cancelar: '))
 
-                sql_delete = 'delete from agendamentos where id = %s'
-                dados_delete = (id,)
+                foi_cancelada = cancelar_consulta_id(id)  
 
-                linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
-                print("%s linhas foram excluídas." % (linhas_afetadas))  
-
-                if linhas_afetadas != 0:
+                if foi_cancelada == True:
                     print('Consulta do ID %s removida com sucesso!' % (id))
                 
                 else:
@@ -207,4 +205,4 @@ while opcao != 9:
 
 
 print('\nObrigado por usar o sistema do nosso hospital!')
-encerrarBancoDados(conexao)
+

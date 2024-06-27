@@ -105,24 +105,64 @@ def pesquisar_medico_crm(crm):
 
 
 def excluir_paciente_cpf(cpf):
-    pass
+
+    sql_delete = 'delete from pacientes where cpf = %s'
+    dados_delete = (cpf,)
+
+    linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
+    foi_excluido = False
+
+    if linhas_afetadas != 0:
+        foi_excluido = True
+
+    return foi_excluido
+
 
 def excluir_medico_crm(crm):
-    pass
 
-def agendar_consulta():
-    pass
+    sql_delete = 'delete from medicos where crm = %s'
+    dados_delete = (crm,)
+
+    linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
+    foi_excluido = False
+
+    if linhas_afetadas != 0:
+        foi_excluido = True
+
+    return foi_excluido
+
+
+def agendar_consulta(dados_agendamento):
+
+    sql_insert = 'insert into agendamentos (data, motivo, cpf, crm) values (%s, %s, %s, %s)'
+    insertNoBancoDados(conexao, sql_insert, dados_agendamento)
+
+
 
 def listar_consultas():
-    pass
 
-def cancelar_consulta():
-    pass
+    sql_select = 'select * from agendamentos'
+    return listarBancoDados(conexao, sql_select)
+
+
+def cancelar_consulta_id(id):
+
+    sql_delete = 'delete from agendamentos where id = %s'
+    dados_delete = (id,)
+
+    foi_cancelada = False
+    linhas_afetadas = excluirBancoDados(conexao, sql_delete, dados_delete)
+
+    if linhas_afetadas != 0:
+        foi_cancelada = True
+
+    return foi_cancelada
+
 
 def adicionar_procedimento_medico():
     pass
 
-def lsitar_procedimentos_medicos():
+def listar_procedimentos_medicos():
     pass
 
 
