@@ -159,12 +159,16 @@ def cancelar_consulta_id(id):
     return foi_cancelada
 
 
-def adicionar_procedimento_medico():
-    pass
+def adicionar_procedimento_medico(dados_procedimento):
+
+    sql_insert = 'insert into procedimentos (data, receita, cpf, crm) values (%s, %s, %s, %s)'
+    insertNoBancoDados(conexao, sql_insert, dados_procedimento)                
+
 
 def listar_procedimentos_medicos():
-    pass
 
+    sql_select = 'select * from procedimentos'
+    return listarBancoDados(conexao, sql_select)
 
 
 encerrarBancoDados(conexao)

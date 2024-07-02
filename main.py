@@ -178,13 +178,13 @@ while opcao != 9:
                 crm = int(input('Digite o CRM do médico: '))
                 dados_procedimento = (data, receita, cpf, crm)
 
-                sql_insert = 'insert into procedimentos (data, receita, cpf, crm) values (%s, %s, %s, %s)'
-                insertNoBancoDados(conexao, sql_insert, dados_procedimento)                
+                adicionar_procedimento_medico(dados_procedimento)
+
+                print('Procedimento médico adicionado com sucesso!')                
 
             elif opcao == 2: # Visualizar todos os procedimentos médicos
-                sql_select = 'select * from procedimentos'
 
-                procedimentos = listarBancoDados(conexao, sql_select)
+                procedimentos = listar_procedimentos_medicos()
 
                 if len(procedimentos) != 0:
                     print('\nLista de Procedimentos médicos:')
