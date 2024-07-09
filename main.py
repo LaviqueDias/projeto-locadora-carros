@@ -1,4 +1,3 @@
-
 from sistema import *
 
 opcao = 1
@@ -53,6 +52,7 @@ while opcao != 9:
 
 
     elif opcao == 3: # Pesquisar paciente pelo CPF
+
         cpf = int(input('\nDigite o CPF do paciente: '))
 
         paciente_pesquisado = pesquisar_paciente_cpf(cpf)
@@ -66,6 +66,7 @@ while opcao != 9:
 
     
     elif opcao == 4: # Pesquisar médico pelo CRM
+        
         crm = int(input('\nDigite o CRM do médico: '))
 
         medico_pesquisado = pesquisar_medico_crm(crm)
@@ -107,9 +108,11 @@ while opcao != 9:
 
 
     elif opcao == 7: # Agendar consulta
+
         opcao = 1
 
         while opcao != 4:
+
             print('\n=====AGENDAMENTO DE CONSULTAS=====')
             print("1. Agendar uma nova consulta")
             print("2. Visualizar todas as consultas")
@@ -119,6 +122,7 @@ while opcao != 9:
             opcao = int(input('\nDigite uma opção: '))
 
             if opcao == 1: # Agendar uma nova consulta
+
                 data = input('\nDigite a data da consulta: ')
                 motivo = input('Digite o motivo da consulta: ')
                 cpf = int(input('Digite o CPF do paciente: '))
@@ -146,6 +150,7 @@ while opcao != 9:
             
 
             elif opcao == 3: # Cancelar o agendamento de uma consulta
+
                 id = int(input('Digite o ID da consulta que deseja cancelar: '))
 
                 foi_cancelada = cancelar_consulta_id(id)  
@@ -161,9 +166,11 @@ while opcao != 9:
                 print('Digite uma opção válida!')
 
     elif opcao == 8: # Registrar procedimento médico
+
         opcao = 1
 
         while opcao != 3:
+
             print('\n=====REGISTRO DE PROCEDIMENTOS=====')
             print("1. Adicionar um procedimento médico")
             print("2. Visualizar todos os procedimentos médicos")
@@ -172,6 +179,7 @@ while opcao != 9:
             opcao = int(input('\nDigite uma opção: '))
 
             if opcao == 1: # Adicionar um procedimento médico
+
                 data = input('\nDigite a data da consulta: ')
                 receita = input('Digite a receita pro paciente: ')
                 cpf = int(input('Digite o CPF do paciente: '))

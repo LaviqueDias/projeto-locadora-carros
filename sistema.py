@@ -1,9 +1,10 @@
-import mysql.connector
+#import mysql.connector
 import env.env
 from operacoesbd import *
 from env import *
 
 conexao = env.conexaoInicial()
+
 
 criarBancoDados(conexao, 'hospital')
 
@@ -20,7 +21,7 @@ campos_pacientes = [
     ]
 
 # Criar tabela 'pacientes'
-criarTabela(conexao, 'pacientes', campos_pacientes, "hospital")
+criarTabela(conexao, 'pacientes', campos_pacientes, 'hospital')
 
 campos_medicos = [
         "nome varchar(100)",
@@ -30,7 +31,7 @@ campos_medicos = [
     ]
 
 # Criar tabela 'medicos'
-criarTabela(conexao, 'medicos', campos_medicos, "hospital")
+criarTabela(conexao, 'medicos', campos_medicos, 'hospital')
 
 campos_agendamentos = [
         "id int auto_increment primary key",
@@ -41,7 +42,7 @@ campos_agendamentos = [
     ]
 
 # Criar tabela 'agendamentos'
-criarTabela(conexao, 'agendamentos', campos_agendamentos, "hospital")
+criarTabela(conexao, 'agendamentos', campos_agendamentos, 'hospital')
 
 campos_procedimentos = [
         "id int auto_increment primary key",
@@ -52,7 +53,7 @@ campos_procedimentos = [
     ]
 
 # Criar tabela 'procedimentos'
-criarTabela(conexao, 'procedimentos', campos_procedimentos, "hospital")
+criarTabela(conexao, 'procedimentos', campos_procedimentos, 'hospital')
 
 
 def adicionar_paciente(dados_paciente, cpf):
