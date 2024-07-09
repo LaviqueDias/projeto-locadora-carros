@@ -1,7 +1,5 @@
 import mysql.connector
 
-NOME_BD = 'hospital'
-
 # Função para iniciar conexão com o mysql
 def criarConexaoInicial(endereco, usuario, senha):
     return mysql.connector.connect(
@@ -12,20 +10,17 @@ def criarConexaoInicial(endereco, usuario, senha):
 
 # Função para finalizar conexão com o mysql
 def encerrarBancoDados(connection):
-    connection.reconnect()
     connection.close()
 
 
 # Funçaõ para criar o banco de dados
 def criarBancoDados(connection, nome_bd):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("CREATE DATABASE IF NOT EXISTS %s" % (nome_bd))
     cursor.close()
 
 # função para criar a tabela
 def criarTabela(connection, nome_tabela, campos, nome_banco_dados):
-    connection.reconnect()
     cursor = connection.cursor()
     cursor.execute("USE %s" % (nome_banco_dados))
     sql = "CREATE TABLE IF NOT EXISTS %s (%s)" % (nome_tabela, ', '.join(campos))
@@ -35,9 +30,7 @@ def criarTabela(connection, nome_tabela, campos, nome_banco_dados):
 
 # Função para listar as tabelas
 def listarTabelas(connection):
-    connection.reconnect()
-    cursor = connection.cursor()
-    cursor.execute("USE %s" % (NOME_BD))    
+    cursor = connection.cursor()    
     cursor.execute("SHOW TABLES")
     tabelas = cursor.fetchall()
     cursor.close()
@@ -45,9 +38,7 @@ def listarTabelas(connection):
 
 # Função para inserir dados na tabela
 def insertNoBancoDados(connection, sql, dados):
-    connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("USE %s" % (NOME_BD))
     cursor.execute(sql, dados)
     connection.commit()
     id = cursor.lastrowid
@@ -56,9 +47,7 @@ def insertNoBancoDados(connection, sql, dados):
 
 # Função para listar dados da tabela
 def listarBancoDados(connection, sql):
-    connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("USE %s" % (NOME_BD))
     cursor.execute(sql)
     results = cursor.fetchall()
     cursor.close()
@@ -66,9 +55,7 @@ def listarBancoDados(connection, sql):
 
 # Função para atualizar dados na tabela
 def atualizarBancoDados(connection, sql, dados):
-    connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("USE %s" % (NOME_BD))
     cursor.execute(sql, dados)
     connection.commit()
     linhasAfetadas = cursor.rowcount
@@ -77,9 +64,7 @@ def atualizarBancoDados(connection, sql, dados):
 
 # Função para excluir dados da tabela
 def excluirBancoDados(connection, sql, dados):
-    connection.reconnect()
     cursor = connection.cursor()
-    cursor.execute("USE %s" % (NOME_BD))
     cursor.execute(sql, dados) 
     connection.commit()
     linhasAfetadas = cursor.rowcount
